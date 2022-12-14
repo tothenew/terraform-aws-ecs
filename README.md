@@ -1,52 +1,42 @@
-# terraform-aws-ecs
+## Terraform ecs Modules
 
-[![Lint Status](https://github.com/tothenew/terraform-aws-ecs/workflows/Lint/badge.svg)](https://github.com/tothenew/terraform-aws-ecs/actions)
-[![LICENSE](https://img.shields.io/github/license/tothenew/terraform-aws-ecs)](https://github.com/tothenew/terraform-aws-ecs/blob/master/LICENSE)
+#### usage for ecs modules
 
-The following content needed to be created and managed:
- - Introduction
-     - Explaination of module 
-     - Intended users
- - Resource created and managed by this module
- - Example Usages
+```hcl
+  source         = "./modules/ecs"
+  name           = "demo1"
+  instance_types = "t2.micro"
+  vpc_id         = module.network.vpcid
 
+  on_demand_percentage = 0
+  asg_min              = 1
+  asg_max              = 3
+  desired_capacity     = 1
+  asg_target_capacity  = 80
 
-<!-- BEGIN_TF_DOCS -->
-## Requirements
+  container_cpu    = 100
+  container_memory = 512
+  containerPort    = 80
+  hostPort         = 80
+```
 
-| Name | Version |
-|------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.72 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | >= 2.10 |
-| <a name="requirement_tls"></a> [tls](#requirement\_tls) | >= 3.0 |
+#### additional variable you can use
 
-## Providers
+```hcl
+imageURI         = []
+```
 
-No providers.
+#### terraform command
 
-## Modules
+##### to initialize module dependencies
 
-No modules.
+``` terraform init ```
 
-## Resources
+##### it will show details what terraform creating       
 
-No resources.
+``` terraform plan ```    
 
-## Inputs
+##### to create planned resource 
 
-No inputs.
-
-## Outputs
-
-No outputs.
-<!-- END_TF_DOCS -->
-
-## Authors
-
-Module managed by [TO THE NEW Pvt. Ltd.](https://github.com/tothenew)
-
-## License
-
-Apache 2 Licensed. See [LICENSE](https://github.com/tothenew/terraform-aws-ecs/blob/main/LICENSE) for full details.
+``` terraform apply ```
 
